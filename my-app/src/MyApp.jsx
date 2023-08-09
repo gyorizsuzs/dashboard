@@ -57,6 +57,36 @@ const dataset = [
   },
 ];
 
+const tableData = new Array(500).fill(null).map((_, index) => {
+  return {
+    name: `name${index}`,
+    age: Math.floor(Math.random() * 100),
+    friend: {
+      name: `friend.Name${index}`,
+      age: Math.floor(Math.random() * 100),
+    },
+  };
+});
+
+const tableColumns = [
+  {
+    Header: "Name",
+    accessor: "name", // String-based value accessors!
+  },
+  {
+    Header: "Age",
+    accessor: "age",
+  },
+  {
+    Header: "Friend Name",
+    accessor: "friend.name",
+  },
+  {
+    Header: "Friend Age",
+    accessor: "friend.age",
+  },
+];
+
 export function MyApp() {
   const [toggleCharts, setToggleCharts] = useState("lineChart");
   const [loading, setLoading] = useState(false);
@@ -93,121 +123,139 @@ export function MyApp() {
         <ShellBarItem icon={addIcon} text="Add" />
       </ShellBar>
 
-      <Card
-        header={
-          <CardHeader
-            titleText="Stock Prices"
-            subtitleText={`Click here to switch to ${switchToChart}`}
-            interactive
-            onClick={handleHeaderClick}
-            avatar={
-              <Icon
-                name={
-                  toggleCharts === "lineChart" ? lineChartIcon : barChartIcon
-                }
-              />
-            }
-          />
-        }
-        style={{ width: "300px" }}
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
       >
-        <Text style={spacing.sapUiContentPadding}>{contentTitle}</Text>
-        {toggleCharts === "lineChart" ? (
-          <LineChart
-            dimensions={[{ accessor: "month" }]}
-            measures={[{ accessor: "data", label: "Stock Price" }]}
-            dataset={dataset}
-            loading={loading}
-          />
-        ) : (
-          <BarChart
-            dimensions={[{ accessor: "month" }]}
-            measures={[{ accessor: "data", label: "Stock Price" }]}
-            dataset={dataset}
-            loading={loading}
-          />
-        )}
-      </Card>
+        <Card
+          header={
+            <CardHeader
+              titleText="Stock Prices"
+              subtitleText={`Click here to switch to ${switchToChart}`}
+              interactive
+              onClick={handleHeaderClick}
+              avatar={
+                <Icon
+                  name={
+                    toggleCharts === "lineChart" ? lineChartIcon : barChartIcon
+                  }
+                />
+              }
+            />
+          }
+          style={{ width: "300px", ...spacing.sapUiContentPadding }}
+        >
+          <Text style={spacing.sapUiContentPadding}>{contentTitle}</Text>
+          {toggleCharts === "lineChart" ? (
+            <LineChart
+              dimensions={[{ accessor: "month" }]}
+              measures={[{ accessor: "data", label: "Stock Price" }]}
+              dataset={dataset}
+              loading={loading}
+            />
+          ) : (
+            <BarChart
+              dimensions={[{ accessor: "month" }]}
+              measures={[{ accessor: "data", label: "Stock Price" }]}
+              dataset={dataset}
+              loading={loading}
+            />
+          )}
+        </Card>
 
-      <Card
-        header={
-          <CardHeader
-            titleText="Progress"
-            subtitleText="List"
-            avatar={<Icon name={listIcon} />}
-          />
-        }
-        style={{ width: "300px" }}
-      >
-        <List>
-          <StandardListItem
-            additionalText="finished"
-            additionalTextState={ValueState.Success}
-            style={{ width: "100%", ...spacing.sapUiContentPadding }}
-          >
-            Activity 1
-          </StandardListItem>
-          <StandardListItem
-            additionalText="failed"
-            additionalTextState={ValueState.Error}
-            style={{ width: "100%", ...spacing.sapUiContentPadding }}
-          >
-            Activity 2
-          </StandardListItem>
-          <CustomListItem>
-            <FlexBox
-              direction={FlexBoxDirection.Column}
+        <Card
+          header={
+            <CardHeader
+              titleText="Progress"
+              subtitleText="List"
+              avatar={<Icon name={listIcon} />}
+            />
+          }
+          style={{ width: "300px", ...spacing.sapUiContentPadding }}
+        >
+          <List>
+            <StandardListItem
+              additionalText="finished"
+              additionalTextState={ValueState.Success}
               style={{ width: "100%", ...spacing.sapUiContentPadding }}
             >
-              <FlexBox justifyContent={FlexBoxJustifyContent.SpaceBetween}>
-                <Text style={{ fontSize: ThemingParameters.sapFontLargeSize }}>
-                  Activity 3
-                </Text>
-                <Text style={{ color: ThemingParameters.sapCriticalTextColor }}>
-                  in progress
-                </Text>
-              </FlexBox>
-              <ProgressIndicator
-                value={89}
-                valueState={ValueState.Success}
-                style={{ ...spacing.sapUiTinyMarginTop }}
-              />
-            </FlexBox>
-          </CustomListItem>
-          <CustomListItem>
-            <FlexBox
-              direction={FlexBoxDirection.Column}
+              Activity 1
+            </StandardListItem>
+            <StandardListItem
+              additionalText="failed"
+              additionalTextState={ValueState.Error}
               style={{ width: "100%", ...spacing.sapUiContentPadding }}
             >
-              <FlexBox justifyContent={FlexBoxJustifyContent.SpaceBetween}>
-                <Text style={{ fontSize: ThemingParameters.sapFontLargeSize }}>
-                  Activity 3
-                </Text>
-                <Text style={{ color: ThemingParameters.sapCriticalTextColor }}>
-                  in progress
-                </Text>
+              Activity 2
+            </StandardListItem>
+            <CustomListItem>
+              <FlexBox
+                direction={FlexBoxDirection.Column}
+                style={{ width: "100%", ...spacing.sapUiContentPadding }}
+              >
+                <FlexBox justifyContent={FlexBoxJustifyContent.SpaceBetween}>
+                  <Text
+                    style={{ fontSize: ThemingParameters.sapFontLargeSize }}
+                  >
+                    Activity 3
+                  </Text>
+                  <Text
+                    style={{ color: ThemingParameters.sapCriticalTextColor }}
+                  >
+                    in progress
+                  </Text>
+                </FlexBox>
+                <ProgressIndicator
+                  value={89}
+                  valueState={ValueState.Success}
+                  style={{ ...spacing.sapUiTinyMarginTop }}
+                />
               </FlexBox>
-              <ProgressIndicator
-                value={5}
-                valueState={ValueState.Error}
-                style={{ ...spacing.sapUiTinyMarginTop }}
-              />
-            </FlexBox>
-          </CustomListItem>
-        </List>
-      </Card>
+            </CustomListItem>
+            <CustomListItem>
+              <FlexBox
+                direction={FlexBoxDirection.Column}
+                style={{ width: "100%", ...spacing.sapUiContentPadding }}
+              >
+                <FlexBox justifyContent={FlexBoxJustifyContent.SpaceBetween}>
+                  <Text
+                    style={{ fontSize: ThemingParameters.sapFontLargeSize }}
+                  >
+                    Activity 3
+                  </Text>
+                  <Text
+                    style={{ color: ThemingParameters.sapCriticalTextColor }}
+                  >
+                    in progress
+                  </Text>
+                </FlexBox>
+                <ProgressIndicator
+                  value={5}
+                  valueState={ValueState.Error}
+                  style={{ ...spacing.sapUiTinyMarginTop }}
+                />
+              </FlexBox>
+            </CustomListItem>
+          </List>
+        </Card>
 
-      <Card
-        header={
-          <CardHeader
-            titleText="AnalyticalTable"
-            avatar={<Icon name={tableViewIcon} />}
+        <Card
+          header={
+            <CardHeader
+              titleText="AnalyticalTable"
+              avatar={<Icon name={tableViewIcon} />}
+            />
+          }
+          style={{ maxWidth: "900px", ...spacing.sapUiContentPadding }}
+        >
+          <AnalyticalTable
+            data={tableData}
+            columns={tableColumns}
+            visibleRows={5}
           />
-        }
-        style={{ maxWidth: "900px" }}
-      >
-        <AnalyticalTable />
-      </Card>
+        </Card>
+      </FlexBox>
     </div>
   );
 }
