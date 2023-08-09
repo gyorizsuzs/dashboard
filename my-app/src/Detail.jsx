@@ -1,6 +1,21 @@
 import React from "react";
-import { Title } from "@ui5/webcomponents-react";
+import {
+  FlexBox,
+  FlexBoxJustifyContent,
+  FlexBoxWrap,
+} from "@ui5/webcomponents-react";
+import { spacing, ThemingParameters } from "@ui5/webcomponents-react-base";
 
 export function Detail() {
-  return <Title>Hello World!</Title>;
+  return (
+    <>
+      <FlexBox
+        justifyContent={FlexBoxJustifyContent.Center}
+        wrap={FlexBoxWrap.Wrap}
+        style={spacing.sapUiContentPadding}
+      >
+        <img src="underConstruction.png" alt="site under construction" />
+      </FlexBox>
+    </>
+  );
 }

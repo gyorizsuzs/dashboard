@@ -24,7 +24,7 @@ export const MyCalendar = () => {
       <Card
         header={<CardHeader titleText="Calendar" subtitleText="" />}
         style={{
-          width: "330px",
+          width: "360px",
           ...spacing.sapUiContentPadding,
           color: ThemingParameters.sapNegativeColor,
           fontSize: ThemingParameters.sapFontHeader1Size,

@@ -35,7 +35,7 @@ export function ProgressCard() {
           />
         }
         style={{
-          width: "330px",
+          width: "360px",
           ...spacing.sapUiContentPadding,
           color: ThemingParameters.sapNegativeColor,
           fontSize: ThemingParameters.sapFontHeader1Size,
@@ -45,12 +45,20 @@ export function ProgressCard() {
           <StandardListItem
             additionalText="finished"
             additionalTextState={ValueState.Success}
+            style={{
+              width: "100%",
+              ...spacing.sapUiContentPadding,
+            }}
           >
             Activity 1
           </StandardListItem>
           <StandardListItem
             additionalText="failed"
             additionalTextState={ValueState.Error}
+            style={{
+              width: "100%",
+              ...spacing.sapUiContentPadding,
+            }}
           >
             Activity 2
           </StandardListItem>

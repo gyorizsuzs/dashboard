@@ -4,7 +4,7 @@ import {
   FlexBoxJustifyContent,
   FlexBoxWrap,
 } from "@ui5/webcomponents-react";
-import { spacing, ThemingParameters } from "@ui5/webcomponents-react-base";
+import { spacing } from "@ui5/webcomponents-react-base";
 import { MyCalendar } from "./components/MyCalendar";
 import { ChartCard } from "./components/ChartCard";
 import { ProgressCard } from "./components/ProgressCard";
